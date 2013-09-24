@@ -13,7 +13,7 @@ $smarty->config_dir = SDIR.'configs';
 $smarty->cache_dir = SDIR.'cache';
 
 
-$conexion = mysql_connect("localhost", "root", "AquiNoSeEntra123");
+$conexion = mysql_connect("localhost", "root", "");
 if (!$conexion) {
 	echo "No pudo conectarse a la BD: " . mysql_error();
 	exit;
