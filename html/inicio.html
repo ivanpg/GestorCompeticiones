@@ -1,0 +1,161 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf8" />
+<title>Inicio</title> 
+<link rel="stylesheet" type="text/css" href="css/principal.css" title="style" />
+<link rel="stylesheet" type="text/css" href="css/registro.css" title="style" />
+</head>
+<body>
+	<div id="contenedor">
+		<div id="cabecera">
+			<div id="acceso">
+				{if !isset($usuarioIdentif)}
+					<a id="acceder" href="#">Zona Privada</a>
+					<div id="panel">
+						<div id="login">	
+							
+							<div id="mensaje" class={$clase}>
+								<p>{$estado}</p>
+								<p>{$info}</p>
+							</div>
+							<form name="generaLiga" action="principal.php" method="post">
+							<ul>
+								<li>
+									<label for="inputUser">Usuario</label>
+									<input id="inputUser" name="inputUser" type="text" />
+								</li>
+								<li>
+									<label for="inputPwd">Pwd</label>
+									<input id="inputPwd" name="inputPwd" type="password" />
+								</li>
+								<li>
+									<input type="submit" name="btnEntrar" id="btnEntrar" value="acceso"/>
+								</li>
+								<!--<li class="panel_button"><img src="images/collapse.png" alt="collapse" /> <a id="esconder" href="#">Esconder</a></li>-->
+							</ul>
+							</form>
+						</div>	
+					</div>
+				{else}
+					<a id="accederOpciones" href="#">{$usuarioIdentif}</a>
+					<div id="config">	
+						<div id="opciones">
+							<ul>
+								<li>
+									<a href="#">Configuración</a>
+								</li>
+								<li>
+									<a href="#">Ayuda</a>
+								</li>
+								<li>
+									<a href="principal.php?op=logout">Cerrar Sesión</a>
+								</li>
+							</ul>	
+						</div>
+					</div>	
+				{/if}					
+			</div>
+		</div>	
+		<div class="clear"></div>
+		<div id="logotipo_seccion" >
+			<div id="logo">
+				<img src="images/logo.png" alt=""/>
+			</div>
+			<div id="seccion_titulo">
+				<h1>Resultados y estadisticas</h1>
+			</div>
+		</div>	
+		<div id="info">
+			
+			<div id="tabsE">
+				<ul id="menu">
+					<li><a href="principal.php?tipoLiga=futbol1"><span>Futbol 1ª</span></a></li>
+					<li><a href="principal.php?tipoLiga=futbol2"><span>Futbol 2ª</span></a></li>
+					<li><a href="principal.php?tipoLiga=baloncesto"><span>Baloncesto</span></a></li>
+					<li><a href="principal.php?tipoLiga=futbolSala"><span>Futbol Sala</span></a></li>
+					<li><a href="principal.php?tipoLiga=balonmano"><span>Balonmano</span></a></li>
+				</ul>
+			</div> 
+			<div>
+				<ul id="submenu">
+					<li><a href="principal.php?op=clasificacion" title="Clasificacion">Clasificacion</a></li>
+					<li><a href="principal.php?op=jornada" title="La Jornada">La Jornada</a></li>
+					{if isset($usuarioIdentif)}<li><a href="principal.php?op=crear" title="Crear Competición">Crear Competición</a></li>{/if}
+					{if isset($usuarioIdentif)}<li><a href="principal.php?op=borrar" title="Borrar Competición">Borrar Competición</a></li>{/if}
+				</ul>
+			</div>
+			<div id="datos">	
+				{if isset($usuarioIdentif) && isset($ligaGenerada) && isset($jornadasV1CompCreada) && isset($jornadasV2CompCreada)}					
+					<!--<div id="campeonato">-->
+						<div class="vueltaCampeonato">
+						{section name=jornada loop=$jornadasV1CompCreada}
+							<p>Jornada {$smarty.section.jornada.iteration}</p>
+							<ul class="jornada">
+							{section name=partido loop=$jornadasV1CompCreada[jornada]}
+								<li>{$jornadasV1CompCreada[jornada][partido]}</li> 
+							{/section}	
+							</ul>					
+						{/section}
+						</div>
+						
+						<div  class="vueltaCampeonato">	
+							{section name=jornada loop=$jornadasV2CompCreada}
+								<p>Jornada {$smarty.section.jornada.iteration + $jornadasV2CompCreada|@count}</p>
+								<ul class="jornada">
+								{section name=partido loop=$jornadasV2CompCreada[jornada]}
+									<li>{$jornadasV2CompCreada[jornada][partido]}</li> 
+								{/section}	
+								</ul>					
+							{/section}
+						</div>	
+					<!--</div>-->
+				<form action="principal.php" method="post">
+					<input type="submit" name="guardarLiga" id="guardarLiga" value="Guardar" />
+				</form>
+				
+				{else if isset($usuarioIdentif) && isset($crear)}
+					{if isset($info)}<p class={$clase}>{$info}</p>{/if}
+					<div id="numEquip">
+						<form name="generaLiga" action="principal.php" method="post">
+						<ul >
+							<li>
+								<label for="numEquip">Numero de equipos</label>
+								<input type="text" name="numEquip"/>
+							</li>
+							<li>
+								<label for="names">Nombre de los equipos (uno por linea)</label>
+								<textarea  name="names" id="names" /></textarea>
+								
+							</li>
+							<li>
+								<input type="submit" name="generarLiga" value="Generar"/>
+							</li>
+						</ul>
+						<!--<ul id="tipoLiga">
+							<li>
+								<label>Elige el tipo de Liga a crear</label>
+								<input type="checkbox" name="option1" value="liga1" checked>Futbol 1ª
+							</li> 
+							<li><input type="checkbox" name="option2" value="liga2" > Futbol 2ª</li>
+							<li><input type="checkbox" name="option3" value="baloncesto"> Baloncesto</li>
+							<li><input type="checkbox" name="option4" value="futbolSala"> Futbol Sala</li>
+							<li><input type="checkbox" name="option5" value="balonMano"> BalonMano</li>
+						</ul>-->
+						</form>
+					</div>
+				{else if isset($verJornadas)}
+					  <!--{html_options name=eligeJornada id=eligeJornada options=$misJornadas selected=$jornadaSelec}-->
+					  <SELECT NAME=eligeJornada id=eligeJornada>
+						{section name=jornada loop=$misJornadas}
+							<OPTION value="{$smarty.section.jornada.iteration}">{$misJornadas[jornada]}</OPTION>
+						{/section}
+						</SELECT>					
+				{/if}
+			</div>		
+		</div>
+	</div>
+<script src="libs/jquery-1.5.0.js"></script>
+<script src="js/principal.js"></script>
+</body>
+</html>

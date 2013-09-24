@@ -1,0 +1,108 @@
+body{
+	background:e6f9ff;
+	margin:0;
+	padding:0;
+}
+
+ul{
+	list-style:none;
+	padding:0;
+}
+div ul li{
+	margin-top:20px;
+}
+div ul li label{
+	width:50px;
+	float:left;
+	padding-left:10px;
+	color:white;
+	margin-right:10px;
+}
+
+input[type="text"][type="password"]{
+	width:155px;
+}
+
+#panel{
+	width: 260px;
+	height: 210px;
+	position: absolute;
+	left:880px;
+	background:black;
+	/*padding-top:5px;*/
+	left:750px;
+
+}
+
+#login{
+	width: 240px;
+	height: 200px;
+	position: relative;
+	margin-top:5px;
+	margin-left:5px;
+	background: #46392F;
+	text-align: left;
+	padding-left: 10px;
+	overflow: hidden;
+}
+
+#config{
+	width: 150px;
+	height: 120px;
+	position: absolute;
+	background:black;
+	left:840px;
+}
+
+#opciones{
+	width: 130px;
+	height: 110px;
+	position: relative;
+	margin-top:5px;
+	margin-left:5px;
+	background: #46392F;
+	text-align: left;
+	padding-left: 10px;
+	overflow: hidden;
+}
+
+
+#config li{
+	margin-top:10px;
+}
+
+#btnEntrar{
+	border: 1px #899690 solid;
+	cursor: pointer;
+	position: relative;
+	top: 5px;
+	left: 100px;
+}
+
+
+#mensaje{
+	margin-left:10px;
+	margin-right:10px;
+	height:50px;
+	margin-top:10px;
+}
+
+#mensaje p{	
+	margin-left:35px;
+}
+
+
+.bienvenido{
+	color: #8f8194;
+	border: solid 1px #8f8194;
+	background:transparent url(../images/login.png) 5px 10px no-repeat;
+}
+
+.error{
+	color:red;
+	border: solid 1px red;
+	background:transparent url(../images/alert.png) 5px 10px no-repeat;
+}
+
+
+
